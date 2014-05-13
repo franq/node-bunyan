@@ -705,6 +705,7 @@ function emitRecord(rec, line, opts, stylize) {
         delete rec.pid;
 
         var level = (upperPaddedNameFromLevel[rec.level] || 'LVL' + rec.level);
+        var rawLevel = rec.level;
         if (opts.color) {
             var colorFromLevel = {
                 10: 'grey',     // TRACE
@@ -923,7 +924,7 @@ function emitRecord(rec, line, opts, stylize) {
                 onelineMsg,
                 extras,
                 details));
-        else if (level == 'ERROR') {
+        else if (rawLevel > INFO) {
             emit(format('%s %s %s:%s%s\n%s',
                 time,
                 level,
